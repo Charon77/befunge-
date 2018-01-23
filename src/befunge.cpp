@@ -221,7 +221,7 @@ State* do_opcode(char c, State* s) {
     break;
     
     default:
-      if (c != ' ' && (c < '0' || c > '9'))
+      if (c != ' ' && (c < '0' || c > '9') && c != NULL )
         e("befunge.cpp")<<"Unrecognized symbol: '"<< c<<"'" << "[" << (int) c << "]" << " at: " << s->cur_x << "," << s->cur_y<< endl;
       
     break;

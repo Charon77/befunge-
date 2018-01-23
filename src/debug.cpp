@@ -11,7 +11,7 @@ public:
 
 ostream& d(char* filename) {
   
-  // true debugging?
+  // Enable debugging?
   if (false){
     return cout<<"D["<<filename<<"]: ";
   } else {
@@ -25,7 +25,7 @@ ostream& d(char* filename) {
 ostream& e(char* filename) {
   
   // Enable Error?
-  if (false){
+  if (true){
     return cout<<"ERROR! E["<<filename<<"]: ";
   } else {
     static NullBuffer null_buffer;

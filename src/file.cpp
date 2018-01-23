@@ -7,7 +7,7 @@ using namespace std;
 char get_char_at_pos(int x, int y, fstream* fs) {
   fs->seekg(fs->beg); //rewind
   
-  char linebuffer[900];
+  char linebuffer[900] = {0};
   
   while (y-- >= 0) {
     
@@ -28,7 +28,7 @@ char get_char_at_pos(int x, int y, fstream* fs) {
 fstream* open_file(char* filename) {
   static fstream fs;
   fs.open(filename, fstream::in);
-  fs.exceptions ( fs.failbit | fs.eofbit );
+  fs.exceptions ( fs.failbit );
   return &fs;
   
 }

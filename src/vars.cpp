@@ -25,7 +25,7 @@ Vars::Vars() {
   x_min = 0;
   x_max = 120;
   y_min = 0;
-  y_max = 30;
+  y_max = 50;
   
   int i;
   for (i = x_min; i<= x_max; i++ ) {
