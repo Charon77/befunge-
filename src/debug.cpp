@@ -25,7 +25,7 @@ ostream& d(char* filename) {
 ostream& e(char* filename) {
   
   // Enable Error?
-  if (true){
+  if (false){
     return cout<<"ERROR! E["<<filename<<"]: ";
   } else {
     static NullBuffer null_buffer;

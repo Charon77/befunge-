@@ -211,6 +211,20 @@ void advance_cursor(State* s) {
     break;
   }
   
+  // TODO: handle overflow (EOF)
+  if (s->cur_x < s->vars->x_min) {
+    s->cur_x = s->vars->x_max;
+  }
+  if (s->cur_y < s->vars->y_min) {
+    s->cur_y = s->vars->y_max;
+  }
+  if (s->cur_x > s->vars->x_max) {
+    s->cur_x = s->vars->x_min;
+  }
+  if (s->cur_y > s->vars->y_max) {
+    s->cur_y = s->vars->y_min;
+  }
+  
   // Do we need to load op?
   if ( has_var (s->vars, s->cur_x, s->cur_y ) ) {
     d("befunge.cpp")<<"Cache HIT: " << s->cur_x << "," << s->cur_y << endl;
