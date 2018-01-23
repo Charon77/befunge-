@@ -12,6 +12,7 @@ struct State {
   bool want_to_halt;
   bool want_to_skip;
   bool want_to_load_char;
+  bool get_value_from_file;
   bool string_mode;
   char op;
   Stack* stack;

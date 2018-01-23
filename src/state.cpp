@@ -7,8 +7,8 @@ State* new_state() {
   
   State* s = new State();
   
-  s->cur_x = 1;
-  s->cur_y = 1;
+  s->cur_x = 0;
+  s->cur_y = 0;
   
   s->stack = new Stack();
   s->direction = RIGHT;

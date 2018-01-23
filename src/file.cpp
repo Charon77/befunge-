@@ -9,7 +9,7 @@ char get_char_at_pos(int x, int y, fstream* fs) {
   
   char linebuffer[900];
   
-  while (y--) {
+  while (y-- >= 0) {
     
     
     fs->getline(linebuffer, 900);
@@ -18,7 +18,7 @@ char get_char_at_pos(int x, int y, fstream* fs) {
     
   }
   
-  char c = linebuffer[x-1];
+  char c = linebuffer[x];
   
   d("file.cpp::get_char_at_pos")<<"'"<<c<<"'"<<endl;
   

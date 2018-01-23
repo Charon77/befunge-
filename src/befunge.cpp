@@ -23,6 +23,24 @@ State* do_opcode(char c, State* s) {
     s->want_to_load_char = false;
   }
   
+  if ( s->get_value_from_file ) {
+    // See 'g'
+    s->get_value_from_file = 0;
+    
+    
+    // Return cursor
+    
+    
+    s->cur_y = stack->pop();
+    s->cur_x = stack->pop();
+    
+    stack->push (c);
+    
+    advance_cursor(s);
+    
+    d("befunge.cpp::RETURNING")<<s->cur_x<<", " <<s->cur_y<<endl;
+    return s;
+  }
   
   if (s->want_to_skip) {
     s->want_to_skip = false;
@@ -51,6 +69,8 @@ State* do_opcode(char c, State* s) {
   
   
   int res;
+  int g_x ;
+  int g_y ;
   
   switch (c) {    
     case '@' :
@@ -172,7 +192,32 @@ State* do_opcode(char c, State* s) {
     break;
     
     case 'g':
-      stack->push ( get_var(s->vars, stack->pop(), stack->pop() ) );
+      g_y = stack->pop();
+      g_x = stack->pop();
+      if ( has_var(s->vars, g_x, g_y ) ) {
+        // push val from the Vars
+        stack->push ( get_var(s->vars, g_x, g_y ) );
+      } else {
+        // Oh no, we need to fetch from file
+        
+        s->get_value_from_file = 1; // We're going to get this from file
+        
+        // save current position
+        stack->push (s->cur_x);
+        stack->push (s->cur_y);
+        
+        d("befunge.cpp::STORE POSITION")<<s->cur_x<<", " <<s->cur_y<<endl;
+        
+        s->cur_x = g_x;
+        s->cur_y = g_y;
+        s->want_to_load_char = 1; // Tell main that we want a char from cursor location
+        
+        
+        
+        
+        
+        return s;
+      }
     break;
     
     default:

@@ -2,7 +2,7 @@
 #include "debug.h"
 
 void put_var (Vars* s, int val, int x, int y) {
-  d("vars.h")<<"PUT " << val << " to " << x << "," << y <<endl ;
+  d("vars.cpp")<<"PUT " << val << " to " << x << "," << y <<endl ;
   s->int_vars[x][y] = val;
   s->flag_vars[x][y] = 1;
   
@@ -13,7 +13,7 @@ void put_var (Vars* s, int val, int x, int y) {
 }
 
 int get_var (Vars* s, int x, int y) {
-  d("vars.h")<<"GET " << " FROM " << x << "," << y <<endl ;
+  d("vars.cpp")<<"GET " << " FROM " << x << "," << y <<endl ;
   return s->int_vars[x][y];
 }
 
@@ -22,8 +22,17 @@ bool has_var (Vars* s, int x, int y) {
 }
 
 Vars::Vars() {
-  x_min = 1;
-  x_max = 50;
-  y_min = 1;
-  y_max = 20;
+  x_min = 0;
+  x_max = 120;
+  y_min = 0;
+  y_max = 30;
+  
+  int i;
+  for (i = x_min; i<= x_max; i++ ) {
+    int j;
+    for (j = y_min; j<= y_max; j++ ) {
+      int_vars[i][j] = (int)' ';
+      flag_vars[i][j] = 0;
+    }
+  }
 }
