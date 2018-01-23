@@ -13,6 +13,7 @@ State* new_state() {
   s->stack = new Stack();
   s->direction = RIGHT;
   s->vars = new Vars();
+  s->want_to_load_char = true; // Load first instruction
   
   return s;
 }

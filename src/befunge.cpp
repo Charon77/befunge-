@@ -15,6 +15,15 @@ State* do_opcode(char c, State* s) {
   
   d("befunge.cpp::FETCH_FROM_POS")<<s->cur_x<<", " <<s->cur_y<<endl;
   
+  
+  if ( s-> want_to_load_char ) {
+    // This is the new char we want. Add to cache
+    d("befunge.cpp::LOADED_FROM_FILE")<<s->cur_x<<", " <<s->cur_y<<endl;
+    put_var (s->vars, c, s->cur_x, s->cur_y);
+    s->want_to_load_char = false;
+  }
+  
+  
   if (s->want_to_skip) {
     s->want_to_skip = false;
     advance_cursor(s);
@@ -168,7 +177,7 @@ State* do_opcode(char c, State* s) {
     
     default:
       if (c != ' ' && (c < '0' || c > '9'))
-        e("befunge.cpp")<<"Unrecognized symbol: '"<< c<<"'" << "[" << (int) c << "]" << endl;
+        e("befunge.cpp")<<"Unrecognized symbol: '"<< c<<"'" << "[" << (int) c << "]" << " at: " << s->cur_x << "," << s->cur_y<< endl;
       
     break;
     
@@ -201,6 +210,17 @@ void advance_cursor(State* s) {
       s->cur_x += 1;
     break;
   }
+  
+  // Do we need to load op?
+  if ( has_var (s->vars, s->cur_x, s->cur_y ) ) {
+    d("befunge.cpp")<<"Cache HIT: " << s->cur_x << "," << s->cur_y << endl;
+    s-> op = get_var( s->vars, s->cur_x, s->cur_y );
+  } else {
+    s->want_to_load_char = true; // yes we do
+    d("befunge.cpp")<<"Cache MISS: " << s->cur_x << "," << s->cur_y << endl;
+    
+  }
+  
   
 }
 

@@ -10,7 +10,12 @@ char get_char_at_pos(int x, int y, fstream* fs) {
   char linebuffer[900];
   
   while (y--) {
+    
+    
     fs->getline(linebuffer, 900);
+    
+    d("file.cpp::BITS")<<fs->good()<<fs->bad()<<fs->eof();
+    
   }
   
   char c = linebuffer[x-1];
@@ -23,7 +28,7 @@ char get_char_at_pos(int x, int y, fstream* fs) {
 fstream* open_file(char* filename) {
   static fstream fs;
   fs.open(filename, fstream::in);
-  fs.exceptions ( fs.failbit);
+  fs.exceptions ( fs.failbit | fs.eofbit );
   return &fs;
   
 }

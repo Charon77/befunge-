@@ -11,7 +11,7 @@ public:
 
 ostream& d(char* filename) {
   
-  // Enable debugging?
+  // true debugging?
   if (false){
     return cout<<"D["<<filename<<"]: ";
   } else {

@@ -11,7 +11,9 @@ struct State {
   int cur_y;
   bool want_to_halt;
   bool want_to_skip;
+  bool want_to_load_char;
   bool string_mode;
+  char op;
   Stack* stack;
   Direction direction;
   Vars* vars;

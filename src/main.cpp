@@ -18,7 +18,14 @@ int main(int argc, char** argv) {
     fstream* fs = open_file(argv[1]);
     while ( !s->want_to_halt)  {
       
-      char op = get_char_at_pos( s->cur_x, s->cur_y, fs);
+      char op;
+      
+      if ( s->want_to_load_char ) {
+        op = get_char_at_pos( s->cur_x, s->cur_y, fs);
+      } else {
+        op = s->op;
+      }
+      
       
       do_opcode(op, s);
     }
