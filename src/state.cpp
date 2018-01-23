@@ -1,5 +1,6 @@
 #include "state.h"
 #include <cstdlib>
+#include <ctime>
 
 State* new_state() {
   
@@ -17,6 +18,7 @@ State* new_state() {
 }
 
 Direction random_dir() {
+  srand (time(NULL));
   int random = rand();
   
   if (random < 1*RAND_MAX/4 ) {
